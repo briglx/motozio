@@ -1,0 +1,30 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+
+    <context:component-scan base-package="motozio"/>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+    </bean>
+
+    <!-- freemarker config -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath"><value>/WEB-INF/views/</value></property>
+    </bean>
+
+    <!-- Application beans -->
+    <bean id="navigationController" class="motozio.controllers.NavigationController">
+        <property name="HealthService" ref="healthService"/>
+    </bean>
+    <bean id="healthService" class="motozio.service.HealthService"/>
+
+</beans>
